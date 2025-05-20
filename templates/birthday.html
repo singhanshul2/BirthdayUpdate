@@ -10,21 +10,107 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- Animate.css -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <!-- Custom CSS -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <style>
+        /* Balloon animation container */
+        .balloon-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+        /* Attractive text styling */
+        .balloon-text {
+            display: inline-block;
+            position: relative;
+            top: 60px; /* Align text below balloons */
+            font-family: 'Pacifico', cursive;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #ffca2c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            animation: flyUp 6s linear forwards, sparkle 2s infinite;
+        }
+        /* Realistic balloon styling with SVG */
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            animation: flyUp 6s linear forwards, sway 2s ease-in-out infinite alternate;
+        }
+        /* Individual balloon colors and positions */
+        .balloon:nth-child(1) {
+            left: -90px;
+            animation-delay: 0.3s;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" fill="%23ff6b6b"><path d="M12 2c-4.4 0-8 3.6-8 8 0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8zm0 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/><path d="M12 18v10l1 1h-2l1-1z"/></svg>') no-repeat center/cover;
+        }
+        .balloon:nth-child(2) {
+            left: -50px;
+            animation-delay: 0.1s;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" fill="%2333ccff"><path d="M12 2c-4.4 0-8 3.6-8 8 0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8zm0 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/><path d="M12 18v10l1 1h-2l1-1z"/></svg>') no-repeat center/cover;
+        }
+        .balloon:nth-child(3) {
+            right: -50px;
+            animation-delay: 0.2s;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" fill="%23ffca2c"><path d="M12 2c-4.4 0-8 3.6-8 8 0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8zm0 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/><path d="M12 18v10l1 1h-2l1-1z"/></svg>') no-repeat center/cover;
+        }
+        .balloon:nth-child(4) {
+            right: -90px;
+            animation-delay: 0s;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" fill="%239b59b6"><path d="M12 2c-4.4 0-8 3.6-8 8 0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8zm0 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/><path d="M12 18v10l1 1h-2l1-1z"/></svg>') no-repeat center/cover;
+        }
+        /* Flying animation */
+        @keyframes flyUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0.3;
+            }
+        }
+        /* Sway animation for realistic balloon movement */
+        @keyframes sway {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(10px); }
+        }
+        /* Sparkle animation for text */
+        @keyframes sparkle {
+            0%, 100% { text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); }
+            50% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 202, 44, 0.6); }
+        }
+    </style>
 </head>
 <body class="bg-gradient">
     <!-- Fixed Return to Home Button -->
     <div class="fixed-button">
-        <a href="{{ url_for('index') }}" class="btn btn-outline-light btn-lg animate-button animate__animated animate__fadeIn" style="font-family: 'Roboto', sans-serif;">Return to Home</a>
+        <a href="{{ url_for('index') }}" class="btn btn-outline-dark btn-lg animate-button animate__animated animate__fadeIn" style="font-family: 'Roboto', sans-serif; display: inline-flex; align-items: center; gap: 8px;">
+            <i class="fas fa-house"></i> Home
+        </a>
     </div>
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="text-center">
             <h1 class="display-3 animate__animated animate__zoomIn sparkle" style="font-family: 'Pacifico', cursive; color: #ffca2c; text-shadow: 2px 2px #d63384;">
                 Many Happy Returns, {{ name }}!
             </h1>
-            <p class="lead animate__animated animate__fadeIn" style="font-family: 'Roboto', sans-serif; color: #fff;">Wishing you a fantastic birthday filled with joy!</p>
         </div>
+    </div>
+    <!-- Balloon Animation -->
+    <div class="balloon-container">
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <p class="lead balloon-text">
+            Wishing you a fantastic birthday filled with joy!
+        </p>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

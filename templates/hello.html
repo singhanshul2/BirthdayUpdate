@@ -12,11 +12,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body class="bg-gradient">
     <!-- Fixed Return to Home Button -->
     <div class="fixed-button">
-        <a href="{{ url_for('index') }}" class="btn btn-outline-light btn-lg animate-button animate__animated animate__fadeIn" style="font-family: 'Roboto', sans-serif;">Return to Home</a>
+        <a href="{{ url_for('index') }}" class="btn btn-outline-dark btn-lg animate-button animate__animated animate__fadeIn" style="font-family: 'Roboto', sans-serif; display: inline-flex; align-items: center; gap: 8px;">
+            <i class="fas fa-house"></i> Home
+        </a>
     </div>
     <div class="container py-5">
         <div class="jumbotron text-center bg-light p-5 rounded-3 shadow animate__animated animate__bounceInDown">
